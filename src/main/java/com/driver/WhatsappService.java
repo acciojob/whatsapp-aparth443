@@ -19,7 +19,7 @@ public class WhatsappService {
         return whatsappRepository.createUser(name, mobile);
     }
 
-    @PostMapping("/add-group")
+
     public Group createGroup(List<User> users){
         // The list contains at least 2 users where the first user is the admin. A group has exactly one admin.
         // If there are only 2 users, the group is a personal chat and the group name should be kept as the name of the second user(other than admin)
@@ -33,7 +33,7 @@ public class WhatsappService {
         return whatsappRepository.createGroup(users);
     }
 
-    @PostMapping("/add-message")
+
     public int createMessage(String content){
         // The 'i^th' created message has message id 'i'.
         // Return the message id.
@@ -41,7 +41,7 @@ public class WhatsappService {
         return whatsappRepository.createMessage(content);
     }
 
-    @PutMapping("/send-message")
+
     public int sendMessage(Message message, User sender, Group group) throws Exception{
         //Throw "Group does not exist" if the mentioned group does not exist
         //Throw "You are not allowed to send message" if the sender is not a member of the group
@@ -49,7 +49,6 @@ public class WhatsappService {
 
         return whatsappRepository.sendMessage(message, sender, group);
     }
-    @PutMapping("/change-admin")
     public String changeAdmin(User approver, User user, Group group) throws Exception{
         //Throw "Group does not exist" if the mentioned group does not exist
         //Throw "Approver does not have rights" if the approver is not the current admin of the group
@@ -58,4 +57,12 @@ public class WhatsappService {
 
         return whatsappRepository.changeAdmin(approver, user, group);
     }
+
+//    public int removeUser(User user) throws Exception{
+//        return whatsappRepository.removeUser(user);
+//    }
+//
+//    public String findMessage(Date start, Date end, int K) throws Exception{
+//        return whatsappRepository.findMessage(start,end,K);
+//    }
 }
